@@ -4,12 +4,15 @@ import 'package:jawad_basit_backend/models/task.dart';
 class TaskServices {
   String kTaskCollection = 'taskCollection';
 
-
   ///Create Task
   Future createTask(TaskModel model) async {
+    DocumentReference docRef = FirebaseFirestore.instance
+        .collection(kTaskCollection)
+        .doc();
     return await FirebaseFirestore.instance
         .collection(kTaskCollection)
-        .add(model.toJson());
+        .doc(docRef.id)
+        .set(model.toJson(docRef.id));
   }
 
   ///Get All Task

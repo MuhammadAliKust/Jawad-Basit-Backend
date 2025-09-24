@@ -56,6 +56,55 @@ class GetAllTaskView extends StatelessWidget {
                 leading: Icon(Icons.task),
                 title: Text(taskList[i].title.toString()),
                 subtitle: Text(taskList[i].description.toString()),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        try {
+                          await TaskServices().deleteTask(taskList[i]).then((
+                            val,
+                          ) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Task has been deleted successfully",
+                                ),
+                              ),
+                            );
+                          });
+                        } catch (e) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                        }
+                      },
+                      icon: Icon(Icons.delete, color: Colors.red),
+                    ),
+                    Checkbox(
+                      value: taskList[i].isCompleted,
+                      onChanged: (val) async {
+                        try {
+                          await TaskServices()
+                              .markTaskAsComplete(taskList[i], val!)
+                              .then((val) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Task has been completed successfully",
+                                    ),
+                                  ),
+                                );
+                              });
+                        } catch (e) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                        }
+                      },
+                    ),
+                  ],
+                ),
               );
             },
           );
