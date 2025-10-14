@@ -4,6 +4,7 @@ import 'package:jawad_basit_backend/services/task.dart';
 import 'package:jawad_basit_backend/views/create_task.dart';
 import 'package:jawad_basit_backend/views/get_completed_task.dart';
 import 'package:jawad_basit_backend/views/get_in_completed_task.dart';
+import 'package:jawad_basit_backend/views/update_task.dart';
 import 'package:provider/provider.dart';
 
 class GetAllTaskView extends StatelessWidget {
@@ -59,6 +60,18 @@ class GetAllTaskView extends StatelessWidget {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    IconButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                UpdateTaskView(model: taskList[i]),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.edit, color: Colors.blue),
+                    ),
                     IconButton(
                       onPressed: () async {
                         try {
