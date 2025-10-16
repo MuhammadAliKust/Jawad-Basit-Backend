@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jawad_basit_backend/views/create_task.dart';
 import 'package:jawad_basit_backend/views/get_all_task.dart';
+import 'package:jawad_basit_backend/views/priority/get_priority.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: GetAllTaskView(),
+      home: GetPriorityView(),
     );
   }
 }
