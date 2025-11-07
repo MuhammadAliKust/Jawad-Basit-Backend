@@ -4,6 +4,7 @@ import 'package:jawad_basit_backend/services/task.dart';
 import 'package:jawad_basit_backend/views/create_task.dart';
 import 'package:jawad_basit_backend/views/get_completed_task.dart';
 import 'package:jawad_basit_backend/views/get_in_completed_task.dart';
+import 'package:jawad_basit_backend/views/priority/get_priority.dart';
 import 'package:jawad_basit_backend/views/update_task.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,24 @@ class GetAllTaskView extends StatelessWidget {
       appBar: AppBar(
         title: Text("Get All Task"),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GetCompletedTask()),
+              );
+            },
+            icon: Icon(Icons.add),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GetPriorityView()),
+              );
+            },
+            icon: Icon(Icons.category),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -61,7 +80,7 @@ class GetAllTaskView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      onPressed: () async {
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -70,7 +89,7 @@ class GetAllTaskView extends StatelessWidget {
                           ),
                         );
                       },
-                      icon: Icon(Icons.edit, color: Colors.blue),
+                      icon: Icon(Icons.edit),
                     ),
                     IconButton(
                       onPressed: () async {
@@ -79,11 +98,7 @@ class GetAllTaskView extends StatelessWidget {
                             val,
                           ) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  "Task has been deleted successfully",
-                                ),
-                              ),
+                              SnackBar(content: Text("Delete successfully")),
                             );
                           });
                         } catch (e) {
@@ -92,7 +107,7 @@ class GetAllTaskView extends StatelessWidget {
                           ).showSnackBar(SnackBar(content: Text(e.toString())));
                         }
                       },
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(Icons.delete),
                     ),
                     Checkbox(
                       value: taskList[i].isCompleted,

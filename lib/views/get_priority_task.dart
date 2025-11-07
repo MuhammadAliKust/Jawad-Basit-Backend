@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:jawad_basit_backend/models/priority.dart';
 import 'package:jawad_basit_backend/models/task.dart';
 import 'package:jawad_basit_backend/services/task.dart';
 import 'package:provider/provider.dart';
 
-class GetInCompletedTask extends StatelessWidget {
-  const GetInCompletedTask({super.key});
+class GetPriorityTaskView extends StatelessWidget {
+  final PriorityModel model;
+  const GetPriorityTaskView({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Get InCompleted Task"),
+        title: Text("Get Priorit Task"),
+        backgroundColor: Colors.blue,
       ),
       body: StreamProvider.value(
-          value: TaskServices().getInCompletedTask(),
+          value: TaskServices().getPriorityTask(model.docId.toString()),
           initialData: [TaskModel()],
-      builder: (context , child){
+        builder: (context, child){
             List<TaskModel> taskList = context.watch<List<TaskModel>>();
             return ListView.builder(
               itemCount: taskList.length,
@@ -26,8 +29,9 @@ class GetInCompletedTask extends StatelessWidget {
                   subtitle: Text(taskList[i].description.toString()),
                 );
               },
-                );
-      },
+            );
+        },
+
       ),
     );
   }

@@ -9,23 +9,27 @@ class GetCompletedTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Get Completed Task")),
+      appBar: AppBar(
+        title: Text("Get Completed Task"),
+        backgroundColor: Colors.blue,
+      ),
       body: StreamProvider.value(
-        value: TaskServices().getCompletedTask(),
-        initialData: [TaskModel()],
-        builder: (context, child) {
-          List<TaskModel> taskList = context.watch<List<TaskModel>>();
-          return ListView.builder(
-            itemCount: taskList.length,
-            itemBuilder: (context, i) {
-              return ListTile(
-                leading: Icon(Icons.task),
-                title: Text(taskList[i].title.toString()),
-                subtitle: Text(taskList[i].description.toString()),
-              );
-            },
-          );
+          value: TaskServices().getCompletedTask(),
+          initialData: [TaskModel()],
+        builder: (context, child){
+            List<TaskModel> taskList = context.watch<List<TaskModel>>();
+            return ListView.builder(
+              itemCount: taskList.length,
+              itemBuilder: (BuildContext context, int i) {
+                return ListTile(
+                  leading: Icon(Icons.task),
+                  title: Text(taskList[i].title.toString()),
+                  subtitle: Text(taskList[i].description.toString()),
+                );
+              },
+            );
         },
+
       ),
     );
   }

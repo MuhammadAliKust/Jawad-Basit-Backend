@@ -11,12 +11,14 @@ class TaskModel {
   final String? title;
   final String? description;
   final String? image;
+  final String? priorityID;
   final bool? isCompleted;
   final int? createdAt;
 
   TaskModel({
     this.docId,
     this.title,
+    this.priorityID,
     this.description,
     this.image,
     this.isCompleted,
@@ -26,6 +28,7 @@ class TaskModel {
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
     docId: json["docID"],
     title: json["title"],
+    priorityID: json["priorityID"],
     description: json["description"],
     image: json["image"],
     isCompleted: json["isCompleted"],
@@ -36,6 +39,7 @@ class TaskModel {
     "docID": taskID,
     "title": title,
     "description": description,
+    "priorityID": priorityID,
     "image": image,
     "isCompleted": isCompleted,
     "createdAt": createdAt,

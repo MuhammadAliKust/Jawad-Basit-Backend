@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jawad_basit_backend/models/priority.dart';
 import 'package:jawad_basit_backend/services/priority.dart';
+import 'package:jawad_basit_backend/views/get_priority_task.dart';
 import 'package:jawad_basit_backend/views/priority/create_priority.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,7 @@ class _GetPriorityViewState extends State<GetPriorityView> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreatePriorityView(
+              builder: (context) => CreatePriorityTask(
                 model: PriorityModel(),
                 isUpdateMode: false,
               ),
@@ -73,7 +74,7 @@ class _GetPriorityViewState extends State<GetPriorityView> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CreatePriorityView(
+                            builder: (context) => CreatePriorityTask(
                               model: priorityList[i],
                               isUpdateMode: true,
                             ),
@@ -83,6 +84,18 @@ class _GetPriorityViewState extends State<GetPriorityView> {
                         });
                       },
                       icon: Icon(Icons.edit),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                GetPriorityTaskView(model: priorityList[i]),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.arrow_forward),
                     ),
                   ],
                 ),
