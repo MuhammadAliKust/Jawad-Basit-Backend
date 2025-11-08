@@ -80,6 +80,27 @@ class GetAllTaskView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
+                      onPressed: () async {
+                        if (taskList[i].favorite!.contains('1')) {
+                          await TaskServices().removeFromFavorite(
+                            taskID: taskList[i].docId.toString(),
+                            userID: '1',
+                          );
+                        }else{
+                          await TaskServices().addToFavorite(
+                            taskID: taskList[i].docId.toString(),
+                            userID: '1',
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        taskList[i].favorite!.contains('1')
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: Colors.red,
+                      ),
+                    ),
+                    IconButton(
                       onPressed: () {
                         Navigator.push(
                           context,

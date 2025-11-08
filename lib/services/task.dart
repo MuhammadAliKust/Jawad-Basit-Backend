@@ -79,7 +79,7 @@ class TaskServices {
 
   ///Bookmark/Favorite a Task
   ///Get Priority Task
-   Stream<List<TaskModel>> getPriorityTask(String priorityID) {
+  Stream<List<TaskModel>> getPriorityTask(String priorityID) {
     return FirebaseFirestore.instance
         .collection(kTaskCollection)
         .where('priorityID', isEqualTo: priorityID)
@@ -89,5 +89,25 @@ class TaskServices {
               .map((taskJson) => TaskModel.fromJson(taskJson.data()))
               .toList(),
         );
+  }
+
+  ///Add to Favorite
+  Future addToFavorite({required String taskID, required String userID}) async {
+    return await FirebaseFirestore.instance
+        .collection(kTaskCollection)
+        .doc(taskID)
+        .update({
+          'favorite': FieldValue.arrayUnion([userID]),
+        });
+  }
+
+  ///Remove to Favorite
+  Future removeFromFavorite({required String taskID, required String userID}) async {
+    return await FirebaseFirestore.instance
+        .collection(kTaskCollection)
+        .doc(taskID)
+        .update({
+          'favorite': FieldValue.arrayRemove([userID]),
+        });
   }
 }
