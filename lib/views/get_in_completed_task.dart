@@ -9,25 +9,23 @@ class GetInCompletedTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Get InCompleted Task"),
-      ),
+      appBar: AppBar(title: Text("Get InCompleted Task")),
       body: StreamProvider.value(
-          value: TaskServices().getInCompletedTask(),
-          initialData: [TaskModel()],
-      builder: (context , child){
-            List<TaskModel> taskList = context.watch<List<TaskModel>>();
-            return ListView.builder(
-              itemCount: taskList.length,
-              itemBuilder: (BuildContext context, int i) {
-                return ListTile(
-                  leading: Icon(Icons.task),
-                  title: Text(taskList[i].title.toString()),
-                  subtitle: Text(taskList[i].description.toString()),
-                );
-              },
-                );
-      },
+        value: TaskServices().getInCompletedTask(),
+        initialData: [TaskModel()],
+        builder: (context, child) {
+          List<TaskModel> taskList = context.watch<List<TaskModel>>();
+          return ListView.builder(
+            itemCount: taskList.length,
+            itemBuilder: (BuildContext context, int i) {
+              return ListTile(
+                leading: Icon(Icons.task),
+                title: Text(taskList[i].title.toString()),
+                subtitle: Text(taskList[i].description.toString()),
+              );
+            },
+          );
+        },
       ),
     );
   }

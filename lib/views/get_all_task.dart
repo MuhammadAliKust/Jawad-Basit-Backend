@@ -86,7 +86,7 @@ class GetAllTaskView extends StatelessWidget {
                             taskID: taskList[i].docId.toString(),
                             userID: '1',
                           );
-                        }else{
+                        } else {
                           await TaskServices().addToFavorite(
                             taskID: taskList[i].docId.toString(),
                             userID: '1',
